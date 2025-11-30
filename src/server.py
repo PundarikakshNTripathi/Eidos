@@ -83,4 +83,12 @@ async def inspect_gpu_kernel(code: str) -> str:
     return await judge.reason(code, output, prompt)
 
 if __name__ == "__main__":
-    mcp.run()
+    import os
+    
+    # Check if running in a Hugging Face Space
+    if os.getenv("SPACE_ID"):
+        # HF Spaces run on port 7860 by default
+        mcp.run(transport="sse", host="0.0.0.0", port=7860)
+    else:
+        # Default to stdio for local/CLI usage
+        mcp.run()

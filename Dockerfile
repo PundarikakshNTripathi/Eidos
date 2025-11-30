@@ -22,4 +22,7 @@ COPY . .
 # Install dependencies
 RUN uv sync
 
+# Expose port for Hugging Face Spaces
+EXPOSE 7860
+
 ENTRYPOINT ["uv", "run", "src/server.py"]
