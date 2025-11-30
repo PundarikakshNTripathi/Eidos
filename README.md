@@ -1,3 +1,12 @@
+---
+title: Eidos
+emoji: 🧬
+colorFrom: purple
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # Eidos: The Agentic Ground Truth Engine
 
 > **Copyright © 2025 Pundarikaksh N Tripathi**  
