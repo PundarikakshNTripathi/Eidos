@@ -184,45 +184,35 @@ docker build -t eidos .
 
 ### Running the Container
 
+**Option 1: Pass Key Directly**
 ```bash
 docker run -i -e GEMINI_API_KEY=your_key_here eidos
 ```
 
----
+**Option 2: Use .env File (Recommended)**
+```bash
+docker run -i --env-file .env eidos
+```
 
-## 📚 Core Components
-
-### 1. The "Essence Extractor" (`analyze_assembly_essence`)
-*   **Logic:** Compiles C++/Rust/Go to Assembly (Intel syntax) using `-O3 -S`.
-*   **Agentic Layer:** Gemini maps critical loops to assembly and identifies missed SIMD opportunities.
-
-### 2. The "Bug Hunter" (`run_sanitizer_suite`)
-*   **Logic:** Compiles with `clang -fsanitize=address,undefined`. Executes binary.
-*   **Agentic Layer:** If a crash occurs, Gemini explains the specific memory corruption cause (e.g., Use-After-Free).
-
-### 3. The "Security Auditor" (`audit_binary_security`)
-*   **Logic:** Runs `readelf` to check for **PIE**, **NX Bit**, and **Stack Canaries**.
-*   **Agentic Layer:** Gemini explains the exploit path if security features are missing.
-
-### 4. The "Logic Inspector" (`explain_ast_logic`)
-*   **Logic:** Runs `clang -Xclang -ast-dump`.
-*   **Agentic Layer:** Gemini analyzes the AST to find logic bugs that syntax checkers miss.
+*Note: The command will appear to "hang". This is normal. It is waiting for JSON-RPC input via Stdio. Do not type in this terminal.*
 
 ---
 
-## ❓ Troubleshooting
+## 🕵️ Testing with MCP Inspector
 
-**Q: "GEMINI_API_KEY not set" error.**
-*   **A**: Ensure you have a `.env` file and that `src/config.py` is loading it correctly.
+To test the server interactively, you need to run the **MCP Inspector** in a **separate terminal**.
 
-**Q: Compilation fails with "command not found".**
-*   **A**: Ensure you are running in an environment (like the Docker container) that has `clang`, `rustc`, and `go` installed.
+1.  **Install Inspector**:
+    ```bash
+    npm install -g @modelcontextprotocol/inspector
+    ```
 
----
+2.  **Run Inspector (Local Mode)**:
+    ```bash
+    npx @modelcontextprotocol/inspector uv run src/server.py
+    ```
 
-## 🤝 Contributing
-
-1.  Fork the repository.
+3.  **Run Inspector (Docker Mode)**:
 2.  Create a feature branch.
 3.  Commit your changes.
 4.  Push to the branch.

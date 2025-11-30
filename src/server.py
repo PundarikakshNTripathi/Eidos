@@ -4,7 +4,6 @@ from src.engines.clang_engine import clang_engine
 from src.engines.rust_engine import rust_engine
 from src.engines.go_engine import go_engine
 
-
 # Initialize FastMCP server
 mcp = FastMCP("Eidos")
 
