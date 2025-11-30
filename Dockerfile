@@ -13,11 +13,20 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
+# Create a non-root user (required by HF Spaces for some setups)
+RUN useradd -m -u 1000 user
+
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
+# Set up working directory
 WORKDIR /app
-COPY . .
+
+# Copy files and set ownership
+COPY --chown=user . .
+
+# Switch to non-root user
+USER user
 
 # Install dependencies
 RUN uv sync
