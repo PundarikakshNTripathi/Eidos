@@ -39,20 +39,6 @@ It employs the **"Double-Loop" Pattern**:
 
 ## 💡 Solution & How It Works
 
-AI Agents often struggle with low-level system programming because they lack "Ground Truth". They hallucinate assembly instructions or misinterpret sanitizer output. Eidos solves this by providing **verified, reasoned feedback**.
-
-### The Double-Loop Workflow
-
-1.  **Tool Call**: An agent (like Claude or Cursor) requests `analyze_assembly_essence(code="...")`.
-2.  **Action (Loop 1)**: Eidos spins up a Docker container, runs `clang -O3 -S`, and captures the raw assembly.
-3.  **Reasoning (Loop 2)**: Eidos sends the Source + Assembly to **Gemini 3 Pro** with a specific prompt (e.g., "Identify SIMD gaps").
-4.  **Synthesis**: The server returns a concise, expert-level explanation to the calling agent.
-
----
-
-## 🏗️ Architecture
-
-Eidos follows a modular architecture where the **MCP Server** acts as the orchestrator between the **System Tools** (The Muscle) and the **LLM** (The Brain).
 
 ```mermaid
 graph TD

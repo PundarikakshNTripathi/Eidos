@@ -13,7 +13,7 @@ class Judge:
             self.client = None
         else:
             self.client = genai.Client(api_key=GEMINI_API_KEY)
-        self.model = "gemini-2.0-flash-exp" # Using 2.0 Flash as requested
+        self.model = "gemini-1.5-flash" # Using 1.5 Flash for stable free tier access
 
     async def reason(self, source_code: str, tool_output: str, prompt: str) -> str:
         """
@@ -41,7 +41,7 @@ I ran a system tool on the following source code.
 """
 
         try:
-            # Gemini 2.0 Flash Call
+            # Gemini 1.5 Flash Call
             response = await self.client.aio.models.generate_content(
                 model=self.model,
                 contents=full_prompt
