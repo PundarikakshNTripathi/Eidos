@@ -1,0 +1,15 @@
+[project]
+name = "eidos"
+version = "0.1.0"
+description = "Agentic MCP Server serving as a Ground Truth Engine for AI Coding Agents"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[fastmcp]",
+    "google-genai",
+    "python-dotenv",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
